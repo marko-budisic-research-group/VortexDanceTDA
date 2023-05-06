@@ -65,6 +65,7 @@ npzwrite(dirname( pathof(VortexDynamics) ) * "/../results/vortex-fields-"* uniqu
 
 # visualize first snapshot of vorticity and the vortex track overlaid
 using CairoMakie
+using Makie
 ax = Makie.heatmap(grid_x, grid_y, Ωs[1], colormap=:balance )
 
 for k = 1:length(γ)

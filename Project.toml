@@ -2,6 +2,7 @@
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 ComponentArrays = "b0b7db55-cfe3-40fc-9ded-d10e2dbeff66"
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
 NPZ = "15e1cf62-19b3-5cfa-8e77-841668bca605"
 OrdinaryDiffEq = "1dea7af3-3e70-54e6-95c3-0bf5283fa5ed"
 PersistenceDiagrams = "90b4794c-894b-4756-a0f8-5efeb5ddf7ae"
