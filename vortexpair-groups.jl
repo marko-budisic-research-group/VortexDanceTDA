@@ -7,16 +7,16 @@ name = "vortexpair-groups"
 
 σ = 0.1
 
-# 1. Define initial configuration of vortices.
-N1 = 3 
-x1 = rand( Normal( 0.0, σ ), N1 )
-y1 = rand( Normal( 0.5, σ ), N1 )
-γ1 = rand( Normal( 1.0, σ ), N1 ) ./ N1 # divide by N1 to maintain ~ constant total circulation
+function vortex_group( N, center, γ, σ_xy, σ_γ)
+    x = rand( Normal( center[1], σ_xy ), N )
+    y = rand( Normal( center[2], σ_xy ), N )
+    γ = rand( Normal( γ, σ_γ ), N ) ./ N # divide by N1 to maintain ~ constant total circulation
+    return x, y, γ
+end
 
-N2 = 6
-x2 = rand( Normal( 0.0, σ ), N2 )
-y2 = rand( Normal( 1.0, σ ), N2 )
-γ2 = rand( Normal( -0.5, σ ), N2 ) ./ N2 # divide by N2 to maintain ~ constant total circulation
+# 1. Define initial configuration of vortices.
+x1, y1, γ1 = vortex_group( 5, (0.0, 0.5), 1.0, 0.1, 0.1 )
+x2, y2, γ2 = vortex_group( 6, (0.0, 1.0), -0.5, 0.1, 0.1 )
 
 u0 = ComponentArray(
 x = [x1; x2],
