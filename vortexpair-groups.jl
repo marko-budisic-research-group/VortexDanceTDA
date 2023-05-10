@@ -3,6 +3,8 @@ using Random, Distributions
 using VortexDynamics
 using ComponentArrays
 
+name = "vortexpair-groups"
+
 σ = 0.1
 
 # 1. Define initial configuration of vortices.
@@ -56,14 +58,14 @@ using NPZ
 using Dates
 
 uniquelabel = string(today())*"-"*randstring(2)
-npzwrite(dirname( pathof(VortexDynamics) ) * "/../results/vortex-tracks-" * uniquelabel *".npz", 
+npzwrite("results/$name-tracks-" * uniquelabel *".npz", 
     ux = ux,
     uy = uy,
     t = ts,
     gamma = γ)
 
 
-npzwrite(dirname( pathof(VortexDynamics) ) * "/../results/vortex-fields-"* uniquelabel *".npz", 
+npzwrite("results/$name-fields-"* uniquelabel *".npz", 
     grid_x = collect(grid_x),
     grid_y = collect(grid_y),
     t = ts,
