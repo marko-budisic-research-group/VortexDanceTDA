@@ -6,15 +6,15 @@ using ComponentArrays
 σ = 0.1
 
 # 1. Define initial configuration of vortices.
-N1 = 3
+N1 = 3 
 x1 = rand( Normal( 0.0, σ ), N1 )
 y1 = rand( Normal( 0.5, σ ), N1 )
-γ1 = rand( Normal( 1.0, σ ), N1 ) ./ N1
+γ1 = rand( Normal( 1.0, σ ), N1 ) ./ N1 # divide by N1 to maintain ~ constant total circulation
 
 N2 = 6
 x2 = rand( Normal( 0.0, σ ), N2 )
 y2 = rand( Normal( 1.0, σ ), N2 )
-γ2 = rand( Normal( -0.5, σ ), N2 ) ./ N2
+γ2 = rand( Normal( -0.5, σ ), N2 ) ./ N2 # divide by N2 to maintain ~ constant total circulation
 
 u0 = ComponentArray(
 x = [x1; x2],
