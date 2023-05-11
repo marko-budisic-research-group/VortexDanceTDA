@@ -81,3 +81,7 @@ for k = 1:length(γ)
             getindex.( getindex.(us, :y), k ) )
 end
 ax
+
+record(ax, "results/$name-"* uniquelabel *".mp4", 1:length(Ωs); framerate = 60) do i
+    Makie.heatmap!(grid_x, grid_y, Ωs[i], colormap=:balance )
+end;
