@@ -8,7 +8,7 @@ name = "vortex-line"
 result_dir="/Users/nipuni/Desktop/Research/VortexDanceTDA/Results-Nipuni/vortex-lines/"
 pixel_size=[16, 101]
 result_folder = ["t100-16x16","t100-101x101"]
-noICs = 60
+noICs = 30
 
 
 function vortex_group( N, center, γ, σ_xy, σ_γ)
@@ -27,7 +27,7 @@ for i = 1:2
         N  = 10
         u0 = ComponentArray(
         x = b[:],
-        y = a[1] .* b .+ a[2] #y = mx+c
+        y = (a[1] .* b ).+ a[2] #y = mx+c
         )
         γ = ones(N) ./ N
 
@@ -92,8 +92,11 @@ for i = 1:2
         end
         ax
 
-        record(ax, result_dir *"$name-"* uniquelabel *".mp4", 1:length(Ωs); framerate = 60) do i
-            Makie.heatmap!(grid_x, grid_y, Ωs[i], colormap=:balance )
-        end;
+        if i == 2
+            record(ax, result_dir *"$name-"* uniquelabel *".mp4", 1:length(Ωs); framerate = 60) do i
+                Makie.heatmap!(grid_x, grid_y, Ωs[i], colormap=:balance )
+            end;
+        end
+        
     end
 end

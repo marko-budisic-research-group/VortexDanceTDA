@@ -8,7 +8,7 @@ name = "vortex-arc"
 result_dir="/Users/nipuni/Desktop/Research/VortexDanceTDA/Results-Nipuni/vortex-arcs/"
 pixel_size=[16, 101]
 result_folder = ["t100-16x16", "t100-101x101"]
-noICs = 60
+noICs = 30
 
 function vortex_group( N, center, γ, σ_xy, σ_γ)
     x = rand( Normal( center[1], σ_xy ), N )
@@ -18,7 +18,7 @@ function vortex_group( N, center, γ, σ_xy, σ_γ)
 end
 
 for i = 1:2 
-    for j = 1:60
+    for j = 1:noICs
         N  = 10
         init_angle = [0 + (2*π) * rand() for i =1:2] # Random angle between 0, 2pi
         angles = collect(LinRange(init_angle[1],init_angle[2],10))
@@ -88,9 +88,12 @@ for i = 1:2
                     getindex.( getindex.(us, :y), k ) )
         end
         ax
-        record(ax, result_dir *"$name-"* uniquelabel *".mp4", 1:length(Ωs); framerate = 60) do i
-            Makie.heatmap!(grid_x, grid_y, Ωs[i], colormap=:balance )
-        end;
+
+        if i == 2
+            record(ax, result_dir *"$name-"* uniquelabel *".mp4", 1:length(Ωs); framerate = 60) do i
+                Makie.heatmap!(grid_x, grid_y, Ωs[i], colormap=:balance )
+            end;
+        end
 
     end
 

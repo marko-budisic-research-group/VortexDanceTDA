@@ -5,11 +5,11 @@ using ComponentArrays
 
 
 result_dir="/Users/nipuni/Desktop/Research/VortexDanceTDA/Results-Nipuni/vortex-pair/"
-pixel_size=[16, 32, 101]
-result_folder = ["t100-16x16","t100-32x32","t100-101x101"]
+pixel_size=[16, 101]
+result_folder = ["t100-16x16","t100-101x101"]
 noICs = 60
 
-for i = 1:3
+for i = 1:2
     for j = 1:noICs
         # 1. Define initial configuration of vortices.
         nVortices = 10
@@ -84,5 +84,12 @@ for i = 1:3
                     getindex.( getindex.(us, :y), k ) )
         end
         ax
+
+        if i == 2
+            record(ax, result_dir *"$name-"* uniquelabel *".mp4", 1:length(Ωs); framerate = 60) do i
+                Makie.heatmap!(grid_x, grid_y, Ωs[i], colormap=:balance )
+            end;
+        end
+        
     end
 end

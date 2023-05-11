@@ -8,7 +8,7 @@ name = "vortexpair-groups"
 result_dir="/Users/nipuni/Desktop/Research/VortexDanceTDA/Results-Nipuni/vortex-pair-groups/"
 pixel_size=[16, 101]
 result_folder = ["t100-16x16","t100-101x101"]
-noICs = 60
+noICs = 30
 
 
 σ = 0.1
@@ -47,8 +47,8 @@ end
 ########################################################
 
 
-#  for i = 1:2
-    # for j = 1:noICs
+ for i = 1:2
+    for j = 1:noICs
         # 1. Define initial configuration of vortices.
         c = round.((2 .* rand(Float64, 4) .- 1)./ 1.5, digits=1) 
         groups = 2
@@ -124,9 +124,11 @@ end
         end
         ax
 
-        record(ax, result_dir*"$name-"* uniquelabel *".mp4", 1:length(Ωs); framerate = 60) do i
-            Makie.heatmap!(grid_x, grid_y, Ωs[i], colormap=:balance )
-        end;
+        if i == 2
+            record(ax, result_dir *"$name-"* uniquelabel *".mp4", 1:length(Ωs); framerate = 60) do i
+                Makie.heatmap!(grid_x, grid_y, Ωs[i], colormap=:balance )
+            end;
+        end
 
-    # end
-# end
+    end
+end
