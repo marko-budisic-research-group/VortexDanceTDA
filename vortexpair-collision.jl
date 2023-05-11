@@ -4,7 +4,10 @@ using VortexDynamics
 using ComponentArrays
 
 name = "vortexpair-collision"
-
+result_dir="/Users/nipuni/Desktop/Research/VortexDanceTDA/Results-Nipuni/vortex-pair-collision/"
+result_folder = ["t100-101x101"]
+noICs = 60
+for i=1:noICs
 σ = 0.1
 
 function vortex_group( N, center, γ, σ_xy, σ_γ)
@@ -61,14 +64,14 @@ using NPZ
 using Dates
 
 uniquelabel = string(today())*"-"*randstring(2)
-npzwrite("results/$name-tracks-" * uniquelabel *".npz", 
+npzwrite(result_dir *"vortex-tracks/"*result_folder[1]*"/$name-tracks-" * uniquelabel *".npz", 
     ux = ux,
     uy = uy,
     t = ts,
     gamma = γ)
 
 
-npzwrite("results/$name-fields-"* uniquelabel *".npz", 
+npzwrite(result_dir *"vortex-fields/"*result_folder[1]*"/$name-fields-"* uniquelabel *".npz", 
     grid_x = collect(grid_x),
     grid_y = collect(grid_y),
     t = ts,
@@ -89,6 +92,8 @@ for k = 1:length(γ)
 end
 ax
 
-record(ax, "results/$name-"* uniquelabel *".mp4", 1:length(Ωs); framerate = 60) do i
+record(ax, result_dir*"/$name-"* uniquelabel *".mp4", 1:length(Ωs); framerate = 60) do i
     Makie.heatmap!(grid_x, grid_y, Ωs[i], colormap=:balance )
 end;
+
+end
