@@ -23,7 +23,6 @@ x = [x1; x2],
 y = [y1; y2]
 )
 γ = [γ1; γ2]
-nVortices = N1 + N2
 
 # 2. Simulate the differential equation
 using OrdinaryDiffEq
@@ -85,3 +84,7 @@ for k = 1:length(γ)
             getindex.( getindex.(us, :y), k ) )
 end
 ax
+
+record(ax, "results/$name-"* uniquelabel *".mp4", 1:length(Ωs); framerate = 60) do i
+    Makie.heatmap!(grid_x, grid_y, Ωs[i], colormap=:balance )
+end;
